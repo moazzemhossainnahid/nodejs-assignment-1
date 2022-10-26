@@ -8,6 +8,15 @@ router.get("/all", usersControllers.getAllUsers);
 // get random user
 router.get("/random", usersControllers.getRandomUser);
 
+// get user by ID
+router.get("/:id", usersControllers.getUserByID);
+
+// save a user
+router.post("/save", usersControllers.saveAUser);
+
+// update a user
+router.patch("/update/:id", usersControllers.updateAUser);
+
 
 
 
