@@ -17,6 +17,9 @@ router.post("/save", usersControllers.saveAUser);
 // update a user
 router.patch("/update/:id", usersControllers.updateAUser);
 
+// delete a user
+router.delete("/:id", usersControllers.deleteUser);
+
 
 
 

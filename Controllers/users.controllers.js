@@ -3,6 +3,7 @@ const fs = require('fs');
 
 
 // get all users
+
 module.exports.getAllUsers = (req, res) => {
     const limit = req.query.limit;
     if (limit) {
@@ -15,6 +16,7 @@ module.exports.getAllUsers = (req, res) => {
 
 
 // get random user
+
 module.exports.getRandomUser = (req, res) => {
     const randomNumber = Math.floor(Math.random() * usersData.length);
     const randUser = usersData.find(user => user.index == randomNumber)
@@ -51,6 +53,8 @@ module.exports.saveAUser = (req, res) => {
 
 
 
+// update a user
+
 module.exports.updateAUser = (req, res) => {
     const { id } = req.params;
     const { name, gender, contact, address, photoUrl } = req.body;
@@ -76,4 +80,24 @@ module.exports.updateAUser = (req, res) => {
             })
         }
     })
+}
+
+
+
+// delete a user
+
+module.exports.deleteUser = (req, res) => {
+    const id = req.params.id;  
+    fs.readFile("UserData.json", "utf-8", (err, data) => {
+        if (err) {
+            console.log(err)
+        } else {
+            let users = JSON.parse(data);
+            users = users.filter(user =>  user._id !== id);            
+            fs.writeFile("UserData.json", JSON.stringify(users, null, 2), (err) => {
+                console.log(err);                
+            });
+        }
+    })
+    res.send("Data Deleted!");
 }
